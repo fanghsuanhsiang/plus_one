@@ -48,8 +48,7 @@ arrprint:
     li a7, 1
     ecall
 arrlength:
-    beqz a1, addlength
-same:
-    addi a2, a2, 1
-addlength:
     
+same:
+    addi a1, a1, 1
+addlength:
