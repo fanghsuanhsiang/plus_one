@@ -27,16 +27,28 @@ plusone:
     lw s2, size1 #load num1 size
     addi s3, s2, -1 #int i
     mv a0, s0 #store num address for i
+    
 loop:
-    lw a1, 0(a0) #load digit[i]
+    lw a1, 0(a0) #load digit[0]
+    add a1, a1, s3 #load digit[i]
     addi a2, zero, 9
     blt a1, a2, same
     mv a1, zero #digit[i] = 0
     addi s3, s3, -1 #i--
     addi a0, a0, 4 #point to next digits[i]
     blt s3, zero, arrlength
+same:
+    addi a1, a1, 1
+    addi s3, s3, -1 #i--
+    j arrlength
 addone:
     addi a1, a1, 1
+arrlength:
+    lw a3, 0(a0) #load digit[0]
+    add a4, a3, s3 #load digit[1]
+    mv a5, a1 #load digit[2]
+    beq a1, zero, addlength
+addlength:
 arrprint:
     mv a0, a1
     li a7, 1
@@ -47,8 +59,3 @@ arrprint:
     mv a0, a1
     li a7, 1
     ecall
-arrlength:
-    
-same:
-    addi a1, a1, 1
-addlength:
